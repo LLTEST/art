@@ -12,6 +12,7 @@ public class GmailTest {
     private void initBrowser() {
         System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
         driver = new FirefoxDriver();
+
         driver.manage().window().maximize();
 
     }
@@ -19,10 +20,12 @@ public class GmailTest {
     @Test(description = "Gmail Spam Test")
     public void GmailSpamTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        loginpage.open();
-        loginpage.LoginFlow();
+        loginpage.open().LoginFlow();
         HomePage homepage = new HomePage(driver);
         homepage.MainLogic();
+        LetterPage letter = new LetterPage(driver);
+        letter.SendEmail();
+        homepage.QuitFromGmail();
     }
 
 
