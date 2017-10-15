@@ -2,11 +2,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class HomePage extends Thread {
+public class HomePage  {
 
     WebDriver driver;
 
@@ -15,8 +16,8 @@ public class HomePage extends Thread {
     }
 
 
-    private static final By COMPOSE_BUTTON = By.cssSelector("#\\3a 3o > div > div");
-    private static final By INPUT_MAIL_FIELD = By.xpath("//*[@class=\"vO\"]");
+    private static final By COMPOSE_BUTTON = By.xpath("//div[text()='COMPOSE']");
+    private static final By INPUT_MAIL_FIELD = By.xpath("//*[@class='vO']");
     private static final By INPUT_TEXT_FIELD = By.xpath("//*[@class=\"Am Al editable LW-avf\"]");
     private static final By SEND_LETTER_BUTTON = By.xpath("//*[@class=\"T-I J-J5-Ji aoO T-I-atl L3\"]");
     private static final By MY_ACCOUNT_BUTTON = By.xpath("//*[@class=\"gb_7a gbii\"]");
@@ -47,11 +48,17 @@ public class HomePage extends Thread {
         final WebElement someid13 = new WebDriverWait(driver2, 10).until(ExpectedConditions.elementToBeClickable(By.name("Oip Tops")));
 
         driver2.findElement(By.name("Oip Tops")).click();
-        Thread.sleep(2000);
-        driver2.findElement(By.cssSelector("#\\:87")).click();
-        final WebElement someid5 = new WebDriverWait(driver2, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label=\"Report spam\"]")));
+        Actions action = new Actions(driver2);
 
-        driver2.findElement(By.xpath("//*[@aria-label=\"Report spam\"]")).click();
+        action.moveToElement(driver2.findElement(By.xpath("//*[@id=\":5\"]/div[2]/div[1]/div/div[2]/div[2]")));
+
+        driver2.findElement(By.xpath("//*[@id=\":5\"]/div[2]/div[1]/div/div[2]/div[2]")).click();
+
+
+        driver2.findElement(By.xpath("//div[28]/div[3]/button[2]")).click();
+     //   final WebElement someid5 = new WebDriverWait(driver2, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@aria-label=\"Report spam\"]")));
+
+     //   driver2.findElement(By.xpath("//*[@aria-label=\"Report spam\"]")).click();
     }
 
 

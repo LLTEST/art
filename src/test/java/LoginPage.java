@@ -4,7 +4,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+public class LoginPage extends AbstractPage {
 
     WebDriver driver;
 
@@ -12,15 +12,17 @@ public class LoginPage {
         this.driver = driver;
     }
 
-    private static final By INPUT_EMAIL = By.xpath(".//*[@id='identifierId']");
-    private static final By INPUT_PASSWORD = By.xpath("//*[@id=\"password\"]/div[1]/div/div[1]/input");
-    private static final By IDENT_NEXT_BUTTON = By.xpath("//*[@id=\"identifierNext\"]/content/span");
-    private static final By PASS_NEXT_BUTTON = By.xpath(("//*[@id=\"passwordNext\"]/content/span"));
+    private static final By INPUT_EMAIL = By.xpath("//*[@id='identifierId']");
+    private static final By INPUT_PASSWORD = By.xpath("//*[@id='password']");
 
-    public void open() {
-        driver.get("http:\\gmail.com");
-        driver.manage().window().maximize();
-    }
+
+
+    private static final By IDENT_NEXT_BUTTON = By.xpath("//*[@id='identifierNext']");
+
+
+    private static final By PASS_NEXT_BUTTON = By.xpath(("//*[@id='passwordNext']"));
+
+
 
 
     public LoginPage LoginFlow() {
@@ -35,4 +37,8 @@ public class LoginPage {
     }
 
 
+    public void open() {
+        driver.get("http:\\gmail.com");
+        driver.manage().window().maximize();
+    }
 }
