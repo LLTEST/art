@@ -1,8 +1,10 @@
+package Pages;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.util.concurrent.TimeUnit;
 
 
 public class HomePage extends AbstractPage  {
@@ -10,28 +12,29 @@ public class HomePage extends AbstractPage  {
     @FindBy(xpath = "//div[text()='COMPOSE']")
     WebElement COMPOSE_BUTTON;
 
-    @FindBy(xpath = "//*[@class=\"gb_7a gbii\"]")
+    @FindBy(xpath = "//span[@class='gb_7a gbii']")
     WebElement MY_ACCOUNT_BUTTON;
 
-    @FindBy(xpath = "//*[@class=\"gb_Ea gb_Ef gb_Mf gb_ue gb_yb\"]")
+    @FindBy(css = "#gb_71")
     WebElement SIGN_OUT_BUTTON;
 
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
-    public void open() { }
 
     public HomePage MainLogic() {
 
 
-        final WebElement someid4 = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(COMPOSE_BUTTON));
+
+        waitForElementClickable(COMPOSE_BUTTON);
         COMPOSE_BUTTON.click();
         return new HomePage(driver);
 
     }
 
     public HomePage QuitFromGmail(){
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         MY_ACCOUNT_BUTTON.click();
         SIGN_OUT_BUTTON.click();
         return new HomePage(driver);

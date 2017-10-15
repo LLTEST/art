@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+        <suite parallel="tests" verbose="1" name="First Suite">
+    <test name="First Test">
+        <classes>
+            <class name="GmailTest"> </class>
+        </classes>
+    </test>
+</suite>
