@@ -14,21 +14,22 @@ public class GmailTest {
     @BeforeClass(description = "start browser")
     private void initBrowser() {
         System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-        driver = new FirefoxDriver();
-
-        driver.manage().window().maximize();
+        driver=new FirefoxDriver();
 
     }
 
     @Test(description = "Gmail Spam Test")
     public void GmailSpamTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        loginpage.open().LoginFlow();
+        loginpage.open().LoginFlow(LoginPage.USER_2, LoginPage.PASS_2);
         HomePage homepage = new HomePage(driver);
         homepage.MainLogic();
         LetterPage letter = new LetterPage(driver);
         letter.SendEmail();
         homepage.QuitFromGmail();
+        loginpage.ChangeAccount();
+     //   loginpage2.open().LoginFlow(LoginPage.USER_1,LoginPage.PASS_1);
+      //  homepage.markLetter();
     }
 
 
