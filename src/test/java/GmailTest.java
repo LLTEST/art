@@ -30,8 +30,8 @@ public class GmailTest {
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
-        //   System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-        //    driver=new FirefoxDriver();
+       //   System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+        //   driver=new FirefoxDriver();
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver=new ChromeDriver();
 
@@ -47,11 +47,8 @@ public class GmailTest {
         Alert alert = driver.switchTo().alert();
         alert.accept();
         driver.manage().deleteAllCookies();
-
-        loginpage.open(URL_PAGE);
-
-        Thread.sleep(5000);
         loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
+        homepage.markLetter();
 
 
 

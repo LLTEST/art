@@ -11,14 +11,17 @@ public class LetterPage extends AbstractPage{
 
     @FindBy(xpath = "//textarea[@class='vO'][1]")
     WebElement inputMailField;
+    @FindBy(xpath = "//*[@name='subjectbox']")
+    WebElement inputSubject;
     @FindBy(xpath = "//div[@class='Am Al editable LW-avf']")
     WebElement inputTextField;
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
     WebElement sendLetterButton;
 
-public void SendEmail(){
+public void SendEmail() throws InterruptedException {
     waitForElementClickable(inputMailField);
     inputMailField.sendKeys("userrtestt1@gmail.com");
+    inputSubject.sendKeys("test nane");
     inputTextField.sendKeys("test_letter");
     sendLetterButton.click();
 
