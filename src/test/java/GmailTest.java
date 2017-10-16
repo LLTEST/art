@@ -1,39 +1,64 @@
 import Pages.HomePage;
 import Pages.LetterPage;
 import Pages.LoginPage;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 public class GmailTest {
 
     private WebDriver driver;
 
-    @BeforeClass(description = "start browser")
+    private static String URL_PAGE="http:\\gmail.com";
+
+    private static String USER_1="userrtestt1@gmail.com";
+
+    private static String PASS_1="p9660220_";
+
+    private static String USER_2="userrtestt2@gmail.com";
+
+    private static String PASS_2="p9660220_";
+
+
+
+
+
+
+
+    @BeforeTest(description = "start browser")
     private void initBrowser() {
-        System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-        driver=new FirefoxDriver();
+        //   System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+        //    driver=new FirefoxDriver();
+        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
+        driver=new ChromeDriver();
 
     }
 
     @Test(description = "Gmail Spam Test")
-    public void GmailSpamTest() throws InterruptedException {
+    public void gmailSpamTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        loginpage.open().LoginFlow(LoginPage.USER_2, LoginPage.PASS_2);
-        HomePage homepage = new HomePage(driver);
-        homepage.MainLogic();
-        LetterPage letter = new LetterPage(driver);
+        HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_2, PASS_2);
+        LetterPage letter = homepage.mainLogic();
         letter.SendEmail();
-        homepage.QuitFromGmail();
-        loginpage.ChangeAccount();
-     //   loginpage2.open().LoginFlow(LoginPage.USER_1,LoginPage.PASS_1);
-      //  homepage.markLetter();
+        homepage.quitFromGmail();
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        driver.manage().deleteAllCookies();
+
+        loginpage.open(URL_PAGE);
+
+        Thread.sleep(5000);
+        loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
+
+
+
     }
 
 
-    @AfterClass(description = "close browser")
+    @AfterTest(description = "close browser")
     public void kill(){
         driver.close();
     }

@@ -3,6 +3,7 @@ package Pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -10,48 +11,41 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class LoginPage extends AbstractPage {
 
     @FindBy(xpath ="//*[@id='identifierId']")
-    WebElement INPUT_EMAIL;
+    WebElement inputEmail;
 
-    @FindBy(xpath ="//*[@id='password']")
-    WebElement INPUT_PASSWORD;
+    @FindBy(xpath ="//*[@id='password']//input")
+    WebElement inputPassword;
 
     @FindBy(xpath ="//*[@id='identifierNext']")
-    WebElement IDENT_NEXT_BUTTON;
+    WebElement identNextButton;
 
     @FindBy(xpath ="//*[@id='passwordNext']")
-    WebElement PASS_NEXT_BUTTON;
+    WebElement passNextButton;
 
 
 
 
-    private static String URL_PAGE="http:\\gmail.com";
-
-    public static String USER_1="userrtestt1@gmail.com";
-
-    public static String PASS_1="p9660220_";
-
-    public static String USER_2="userrtestt2@gmail.com";
-
-    public static String PASS_2="p9660220_";
 
     public LoginPage(WebDriver driver) {
         super(driver) ;
     }
 
 
-    public LoginPage LoginFlow(String user, String pass) {
+    public HomePage LoginFlow(String user, String pass) throws InterruptedException {
 
-        waitForElementPresent(INPUT_EMAIL);
-        INPUT_EMAIL.sendKeys(user);
-        IDENT_NEXT_BUTTON.click();
-        waitForElementPresent(INPUT_PASSWORD);
-        INPUT_PASSWORD.sendKeys(pass);
-        PASS_NEXT_BUTTON.click();
-        return new LoginPage(driver);
+        waitForElementPresent(inputEmail);
+        inputEmail.sendKeys(user);
+        identNextButton.click();
+        waitForElementClickable(inputPassword);
+        Actions action = new Actions(driver);
+        action.moveToElement(inputPassword).click();
+        inputPassword.sendKeys(pass);
+        passNextButton.click();
+        return new HomePage(driver);
     }
 
 
-    public LoginPage open() {
+    public LoginPage open(String URL_PAGE) {
 
         driver.get(URL_PAGE);
         driver.manage().window().maximize();
