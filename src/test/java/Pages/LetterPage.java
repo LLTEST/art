@@ -21,7 +21,7 @@ public class LetterPage extends AbstractPage{
 public void SendEmail() throws InterruptedException {
     waitForElementClickable(inputMailField);
     inputMailField.sendKeys("userrtestt1@gmail.com");
-    inputSubject.sendKeys("test nane");
+    inputSubject.sendKeys("test name");
     inputTextField.sendKeys("test_letter");
     sendLetterButton.click();
 

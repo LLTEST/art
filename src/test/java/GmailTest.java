@@ -22,16 +22,21 @@ public class GmailTest {
 
     private static String PASS_2="p9660220_";
 
+    private static String USER_3="userrtestt3@gmail.com";
 
+    private static String PASS_3="p9660220_";
 
+    private static String USER_4="userrtestt4@gmail.com";
+
+    private static String PASS_4="p9660220_";
 
 
 
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
-       //   System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-        //   driver=new FirefoxDriver();
+      //    System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
+      //     driver=new FirefoxDriver();
         System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
         driver=new ChromeDriver();
 
@@ -40,7 +45,7 @@ public class GmailTest {
     @Test(description = "Gmail Spam Test")
     public void gmailSpamTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
-        HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_2, PASS_2);
+        HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_4, PASS_4);
         LetterPage letter = homepage.mainLogic();
         letter.SendEmail();
         homepage.quitFromGmail();
@@ -48,7 +53,20 @@ public class GmailTest {
         alert.accept();
         driver.manage().deleteAllCookies();
         loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
-        homepage.markLetter();
+        homepage.markSpamLetter();
+        homepage.deleteSpam();
+        homepage.quitFromGmail();
+        driver.switchTo().alert();
+        alert.accept();
+        driver.manage().deleteAllCookies();
+        loginpage.open(URL_PAGE).LoginFlow(USER_4,PASS_4);
+        homepage.mainLogic();
+        letter.SendEmail();
+        homepage.quitFromGmail();
+        driver.switchTo().alert();
+        alert.accept();
+        driver.manage().deleteAllCookies();
+        loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
 
 
 

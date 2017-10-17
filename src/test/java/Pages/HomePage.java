@@ -44,45 +44,22 @@ public class HomePage extends AbstractPage  {
         return new LoginPage(driver);
     }
 
-    public HomePage markLetter() throws InterruptedException {
+    public void markSpamLetter()  {
+
 
         String expectedText = "test name";
         for (WebElement webElement : allLetters){
             if (webElement.findElement(By.xpath("./td[6]")).getText().contains(expectedText)){
                 System.out.println(webElement.findElement(By.xpath("./td[6]")).getText());
-                webElement.findElement(By.xpath("./td[0]")).click();
-                Thread.sleep(8000);
-                Actions action = new Actions(driver);
-                action.moveToElement(driver.findElement(By.xpath("//*[@id=':31']")));
-                action.click();
-
-             //   driver.findElement(By.xpath("//tbody//div[@class='T-Jo-auh']")).click();
-//                (webElement.findElement(By.xpath("//tbody//td[6]//b")).getText().contains(expectedText)){
-//                    webElement.findElement(By.xpath("//tbody//div[@class='T-Jo-auh']")).click();
-
-           //     final WebElement someid5 = new WebDriverWait(driver, 10).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id=":31"]")));
-
-             //      driver.findElement(By.xpath("//*[@aria-label=\"Report spam\"]")).click();
-
-                   Thread.sleep(2000);
-//
-//               driver.findElement(By.xpath("//*[@id=\":5\"]/div/div[1]/div[1]/div/div/div[2]/div[1]")).click();
-         //tbody//td[6]
+                webElement.findElement(By.xpath("./td[2]/div/div")).click();
             }
         }
-
-//        if (webElement.findElement(By.xpath("./td[6]")).getText().contains(expectedText)){
-//            webElement.findElement(By.xpath("./td[]")).click();
-
-//        driver.findElement(By.xpath("//*[@role='checkbox'][1]")).click();
-//
-//        Actions action = new Actions(driver);
-//
-//        action.moveToElement(driver.findElement(By.xpath("//*[@id=':5']/div/div[1]/div[1]/div/div/div[2]/div[2]")));
-//        driver.findElement(By.xpath("//*[@id=':5']/div/div[1]/div[1]/div/div/div[2]/div[2]")).click();
-
-        return new HomePage(driver);
     }
 
+    public void deleteSpam(){
+        Actions action = new Actions(driver);
+        action.moveToElement(driver.findElement(By.xpath("//div[contains(@act,'9')]")));
+        driver.findElement(By.xpath("//div[contains(@act,'9')]")).click();
+    }
 
 }
