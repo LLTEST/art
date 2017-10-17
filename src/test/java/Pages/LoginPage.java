@@ -1,12 +1,9 @@
 package Pages;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage extends AbstractPage {
 
@@ -52,8 +49,5 @@ public class LoginPage extends AbstractPage {
         return this;
     }
 
-    public void ChangeAccount(){
-        final WebElement someid2 = new WebDriverWait(driver, 10).until(ExpectedConditions.elementToBeClickable(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/form/div[1]/div/div/div[2]/div/content/span/span/svg")));
-        driver.findElement(By.xpath("/html/body/div[1]/div[1]/div[2]/div[2]/form/div[1]/div/div/div[2]/div/content/span/span/svg")).click();
-    }
+
 }
