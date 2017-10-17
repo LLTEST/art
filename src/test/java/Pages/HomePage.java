@@ -24,20 +24,23 @@ public class HomePage extends AbstractPage  {
     @FindBy(xpath = "//*[@id=':34']/tbody/tr")
     List<WebElement> allLetters;
 
+    @FindBy(xpath = "//*[@id=':68']/tbody/tr")
+    List<WebElement> allSpamLetters;
+
     public HomePage(WebDriver driver) {
         super(driver);
     }
 
 
-    public LetterPage mainLogic() {
+    public LetterPage openLetter() {
 
         waitForElementClickable(composeButton);
         composeButton.click();
         return new LetterPage(driver);
-
     }
 
     public LoginPage quitFromGmail(){
+
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         myAccountButton.click();
         signOutButton.click();
@@ -45,7 +48,6 @@ public class HomePage extends AbstractPage  {
     }
 
     public void markSpamLetter()  {
-
 
         String expectedText = "test name";
         for (WebElement webElement : allLetters){
@@ -56,10 +58,31 @@ public class HomePage extends AbstractPage  {
         }
     }
 
+    public void verifySpamLetter(){
+
+        String expectedText = "test name";
+        for (WebElement webElement : allSpamLetters){
+            if (webElement.findElement(By.xpath("./td[6]")).getText().contains(expectedText)){
+                System.out.println(webElement.findElement(By.xpath("./td[6]")).getText());
+            } else {
+                System.out.println("Letter doesn't exist- TEST FAILED");
+            }
+        }
+    }
+
+
+    public void openSpamFolder() throws InterruptedException {
+        Thread.sleep(3000);
+        driver.findElement(By.xpath("//span[contains(.,'More ')]")).click();
+        driver.findElement(By.xpath("//a[@href='https://mail.google.com/mail/u/0/#spam']")).click();
+        Thread.sleep(4000);
+    }
+
+
     public void deleteSpam(){
+
         Actions action = new Actions(driver);
         action.moveToElement(driver.findElement(By.xpath("//div[contains(@act,'9')]")));
         driver.findElement(By.xpath("//div[contains(@act,'9')]")).click();
     }
-
 }

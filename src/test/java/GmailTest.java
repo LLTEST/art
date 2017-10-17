@@ -46,7 +46,8 @@ public class GmailTest {
     public void gmailSpamTest() throws InterruptedException {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_4, PASS_4);
-        LetterPage letter = homepage.mainLogic();
+
+        LetterPage letter = homepage.openLetter();
         letter.SendEmail();
         homepage.quitFromGmail();
         Alert alert = driver.switchTo().alert();
@@ -60,14 +61,15 @@ public class GmailTest {
         alert.accept();
         driver.manage().deleteAllCookies();
         loginpage.open(URL_PAGE).LoginFlow(USER_4,PASS_4);
-        homepage.mainLogic();
+        homepage.openLetter();
         letter.SendEmail();
         homepage.quitFromGmail();
         driver.switchTo().alert();
         alert.accept();
         driver.manage().deleteAllCookies();
         loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
-
+        homepage.openSpamFolder();
+        homepage.verifySpamLetter();
 
 
     }
