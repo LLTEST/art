@@ -28,7 +28,7 @@ public class LoginPage extends AbstractPage {
     }
 
 
-    public HomePage LoginFlow(String user, String pass) throws InterruptedException {
+    public HomePage LoginFlow(String user, String pass) {
 
         waitForElementPresent(inputEmail);
         inputEmail.sendKeys(user);

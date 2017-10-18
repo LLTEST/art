@@ -18,10 +18,10 @@ public class LetterPage extends AbstractPage{
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
     WebElement sendLetterButton;
 
-public void SendEmail() throws InterruptedException {
+public void SendEmail(String nameLetter) {
     waitForElementClickable(inputMailField);
     inputMailField.sendKeys("userrtestt1@gmail.com");
-    inputSubject.sendKeys("test name");
+    inputSubject.sendKeys(nameLetter);
     inputTextField.sendKeys("test_letter");
     sendLetterButton.click();
 

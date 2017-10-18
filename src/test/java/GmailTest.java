@@ -1,7 +1,6 @@
 import Pages.HomePage;
 import Pages.LetterPage;
 import Pages.LoginPage;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
@@ -43,33 +42,20 @@ public class GmailTest {
     }
 
     @Test(description = "Gmail Spam Test")
-    public void gmailSpamTest() throws InterruptedException {
+    public void gmailSpamTest() {
         LoginPage loginpage = new LoginPage(driver);
         HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_4, PASS_4);
-
         LetterPage letter = homepage.openLetter();
-        letter.SendEmail();
+        letter.SendEmail("test name");
         homepage.quitFromGmail();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
-        driver.manage().deleteAllCookies();
         loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
-        homepage.markSpamLetter();
-        homepage.deleteSpam();
-        homepage.quitFromGmail();
-        driver.switchTo().alert();
-        alert.accept();
-        driver.manage().deleteAllCookies();
+        homepage.markSpamLetter().reportSpam().quitFromGmail();
         loginpage.open(URL_PAGE).LoginFlow(USER_4,PASS_4);
         homepage.openLetter();
-        letter.SendEmail();
+        letter.SendEmail("test pain");
         homepage.quitFromGmail();
-        driver.switchTo().alert();
-        alert.accept();
-        driver.manage().deleteAllCookies();
         loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
-        homepage.openSpamFolder();
-        homepage.verifySpamLetter();
+        homepage.openSpamFolder().verifySpamLetter("test name");
 
 
     }
