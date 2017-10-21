@@ -1,6 +1,6 @@
 package Pages;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -17,9 +17,10 @@ public class AbstractPage {
         PageFactory.initElements(this.driver, this);
     }
 
-    private boolean isElementPresent(By by) {
+    public boolean isElementPresent() {
         try {
-            driver.findElement(by);
+            Alert alert = driver.switchTo().alert();
+            alert.accept();
             return true;
         } catch (org.openqa.selenium.NoSuchElementException e) {
             return false;

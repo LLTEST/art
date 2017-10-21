@@ -1,8 +1,11 @@
+package Test;
+
+import Driver.DriverSingleton;
 import Pages.HomePage;
 import Pages.LetterPage;
 import Pages.LoginPage;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -34,36 +37,33 @@ public class GmailTest {
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
-      //    System.setProperty("webdriver.gecko.driver", "src/main/resources/geckodriver.exe");
-      //     driver=new FirefoxDriver();
-        System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver.exe");
-        driver=new ChromeDriver();
+
+          driver= DriverSingleton.getWebDriverInstance("firefox");
 
     }
 
-    @Test(description = "Gmail Spam Test")
-    public void gmailSpamTest() {
+    @Test(description = "gmail Spam Test")
+    public void gmailSpamTest()  {
         LoginPage loginpage = new LoginPage(driver);
-        HomePage homepage = loginpage.open(URL_PAGE).LoginFlow(USER_4, PASS_4);
+        HomePage homepage = loginpage.open(URL_PAGE).loginFlow(USER_4, PASS_4);
         LetterPage letter = homepage.openLetter();
-        letter.SendEmail("test name");
+        letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
+        loginpage.open(URL_PAGE).loginFlow(USER_1,PASS_1);
         homepage.markSpamLetter().reportSpam().quitFromGmail();
-        loginpage.open(URL_PAGE).LoginFlow(USER_4,PASS_4);
+        loginpage.open(URL_PAGE).loginFlow(USER_4,PASS_4);
         homepage.openLetter();
-        letter.SendEmail("test pain");
+        letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(URL_PAGE).LoginFlow(USER_1,PASS_1);
-        homepage.openSpamFolder().verifySpamLetter("test name");
-
-
+        loginpage.open(URL_PAGE).loginFlow(USER_1,PASS_1);
+        homepage.openSpamFolder().verifySpamLetter();
+        Assert.assertTrue(homepage.verifySpamLetter());
     }
 
 
     @AfterTest(description = "close browser")
     public void kill(){
-        driver.close();
+        DriverSingleton.closeDriver();
     }
 
 }

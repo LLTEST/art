@@ -8,16 +8,16 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends AbstractPage {
 
     @FindBy(xpath ="//*[@id='identifierId']")
-    WebElement inputEmail;
+    private WebElement inputEmail;
 
     @FindBy(xpath ="//*[@id='password']//input")
-    WebElement inputPassword;
+    private WebElement inputPassword;
 
     @FindBy(xpath ="//*[@id='identifierNext']")
-    WebElement identNextButton;
+    private WebElement identNextButton;
 
     @FindBy(xpath ="//*[@id='passwordNext']")
-    WebElement passNextButton;
+    private WebElement passNextButton;
 
 
 
@@ -28,7 +28,7 @@ public class LoginPage extends AbstractPage {
     }
 
 
-    public HomePage LoginFlow(String user, String pass) {
+    public HomePage loginFlow(String user, String pass) {
 
         waitForElementPresent(inputEmail);
         inputEmail.sendKeys(user);

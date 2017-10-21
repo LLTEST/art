@@ -1,11 +1,11 @@
 package Pages;
 
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.FindBys;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
@@ -16,16 +16,16 @@ public class HomePage extends AbstractPage  {
     @FindBy(xpath = "//div[text()='COMPOSE']")
     private WebElement composeButton;
 
-    @FindBy(xpath = "//span[@class='gb_7a gbii']")
+    @FindBy(xpath = "//span[@class='gb_ab gbii']")
     private WebElement myAccountButton;
 
     @FindBy(css = "#gb_71")
     private WebElement signOutButton;
 
-    @FindBy(xpath = "//*[@id=':34']/tbody/tr")
-    private List<WebElement> allLetters;
+    @FindBys({@FindBy(xpath = "//*[@id=':34']/tbody/tr")})
+    private List<WebElement> allInboxLetters;
 
-    @FindBy(xpath = "//*[@id=':68']/tbody/tr")
+    @FindBy(xpath = "//*[@id=':2e']/tbody/tr")
     private List<WebElement> allSpamLetters;
 
     @FindBy(xpath = "//span[contains(.,'More ')]")
@@ -58,8 +58,7 @@ public class HomePage extends AbstractPage  {
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         myAccountButton.click();
         signOutButton.click();
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
+        isElementPresent();
         driver.manage().deleteAllCookies();
         return new LoginPage(driver);
     }
@@ -67,22 +66,25 @@ public class HomePage extends AbstractPage  {
     public HomePage markSpamLetter()  {
 
         String expectedText = "test name";
-        for (WebElement webElement : allLetters){
+        for (WebElement webElement : allInboxLetters ){
             if (webElement.findElement(messageName).getText().contains(expectedText)){
+                System.out.println(webElement.findElement(messageName).getText());
                 webElement.findElement(letterCheckbox).click();
             }
         }
         return this;
     }
 
-    public HomePage verifySpamLetter(String expectedText){
+    public boolean verifySpamLetter()  {
 
-        for (WebElement webElement : allSpamLetters){
+        String expectedText = "test name";
+        for (WebElement webElement : allSpamLetters ){
             if (webElement.findElement(messageName).getText().contains(expectedText)){
                 System.out.println(webElement.findElement(messageName).getText());
+                return true;
             }
         }
-        return this;
+        return false;
     }
 
 

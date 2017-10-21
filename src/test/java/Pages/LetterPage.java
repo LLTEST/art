@@ -10,15 +10,15 @@ public class LetterPage extends AbstractPage{
     super(driver); }
 
     @FindBy(xpath = "//textarea[@class='vO'][1]")
-    WebElement inputMailField;
+    private WebElement inputMailField;
     @FindBy(xpath = "//*[@name='subjectbox']")
-    WebElement inputSubject;
+    private WebElement inputSubject;
     @FindBy(xpath = "//div[@class='Am Al editable LW-avf']")
-    WebElement inputTextField;
+    private WebElement inputTextField;
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
-    WebElement sendLetterButton;
+    private WebElement sendLetterButton;
 
-public void SendEmail(String nameLetter) {
+public void sendEmail(String nameLetter) {
     waitForElementClickable(inputMailField);
     inputMailField.sendKeys("userrtestt1@gmail.com");
     inputSubject.sendKeys(nameLetter);

@@ -3,7 +3,7 @@
         <suite parallel="tests" verbose="1" name="First Suite">
     <test name="First Test">
         <classes>
-            <class name="GmailTest"> </class>
+            <class name="Test.GmailTest"> </class>
         </classes>
     </test>
 </suite>
