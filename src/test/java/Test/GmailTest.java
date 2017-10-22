@@ -1,5 +1,6 @@
 package Test;
 
+import Data.DataSet;
 import Driver.DriverSingleton;
 import Pages.HomePage;
 import Pages.LetterPage;
@@ -13,49 +14,31 @@ import org.testng.annotations.Test;
 public class GmailTest {
 
     private WebDriver driver;
-
-    private static String URL_PAGE="http:\\gmail.com";
-
-    private static String USER_1="userrtestt1@gmail.com";
-
-    private static String PASS_1="p9660220_";
-
-    private static String USER_2="userrtestt2@gmail.com";
-
-    private static String PASS_2="p9660220_";
-
-    private static String USER_3="userrtestt3@gmail.com";
-
-    private static String PASS_3="p9660220_";
-
-    private static String USER_4="userrtestt4@gmail.com";
-
-    private static String PASS_4="p9660220_";
-
-
-
+    private LoginPage loginpage;
+    private HomePage homepage;
+    private LetterPage letter;
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
 
-          driver= DriverSingleton.getWebDriverInstance("firefox");
+          driver= DriverSingleton.getWebDriverInstance("chrome");
 
     }
 
     @Test(description = "gmail Spam Test")
     public void gmailSpamTest()  {
-        LoginPage loginpage = new LoginPage(driver);
-        HomePage homepage = loginpage.open(URL_PAGE).loginFlow(USER_4, PASS_4);
-        LetterPage letter = homepage.openLetter();
+        loginpage = new LoginPage(driver);
+        homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_4, DataSet.PASS_4);
+        letter = homepage.openLetter();
         letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(URL_PAGE).loginFlow(USER_1,PASS_1);
+        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_1,DataSet.PASS_1);
         homepage.markSpamLetter().reportSpam().quitFromGmail();
-        loginpage.open(URL_PAGE).loginFlow(USER_4,PASS_4);
+        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_4,DataSet.PASS_4);
         homepage.openLetter();
         letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(URL_PAGE).loginFlow(USER_1,PASS_1);
+        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_1,DataSet.PASS_1);
         homepage.openSpamFolder().verifySpamLetter();
         Assert.assertTrue(homepage.verifySpamLetter());
     }
