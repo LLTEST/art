@@ -1,10 +1,10 @@
 package Test;
-
 import Data.DataSet;
 import Driver.DriverSingleton;
 import Pages.HomePage;
 import Pages.LetterPage;
 import Pages.LoginPage;
+import businessObjects.User;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -25,22 +25,22 @@ public class GmailTest {
 
     }
 
+
     @Test(description = "gmail Spam Test")
-    public void gmailSpamTest()  {
+    public void gmailSpamTest(User user1, User user2)  {
         loginpage = new LoginPage(driver);
-        homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_4, DataSet.PASS_4);
+        homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(),user1.getPASS1());
         letter = homepage.openLetter();
         letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_1,DataSet.PASS_1);
+        loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER4(),user2.getPASS4());
         homepage.markSpamLetter().reportSpam().quitFromGmail();
-        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_4,DataSet.PASS_4);
+        loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(),user1.getPASS1());
         homepage.openLetter();
         letter.sendEmail("test name");
         homepage.quitFromGmail();
-        loginpage.open(DataSet.URL_PAGE).loginFlow(DataSet.USER_1,DataSet.PASS_1);
-        homepage.openSpamFolder().verifySpamLetter();
-        Assert.assertTrue(homepage.verifySpamLetter());
+        loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER4(),user2.getPASS4());
+        Assert.assertTrue(homepage.openSpamFolder().verifySpamLetter());
     }
 
 

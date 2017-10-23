@@ -29,7 +29,7 @@ public class DriverSingleton {
                     creator = new ChromeDriverCreator();
                     break;
             }
-            driver = creator.FactoryMethod();
+            driver = creator.factoryMethod();
         }
         return driver;
     }

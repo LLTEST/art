@@ -28,10 +28,10 @@ public class LoginPage extends AbstractPage {
     }
 
 
-    public HomePage loginFlow(String user, String pass) {
+    public HomePage loginFlow(String email,String pass) {
 
         waitForElementPresent(inputEmail);
-        inputEmail.sendKeys(user);
+        inputEmail.sendKeys(email);
         identNextButton.click();
         waitForElementClickable(inputPassword);
         Actions action = new Actions(driver);

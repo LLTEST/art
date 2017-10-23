@@ -6,5 +6,5 @@ public abstract class WebDriverCreator {
 
     protected WebDriver driver;
 
-    public abstract WebDriver FactoryMethod();
+    public abstract WebDriver factoryMethod();
 }
