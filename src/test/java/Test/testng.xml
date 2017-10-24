@@ -2,11 +2,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
         <suite parallel="tests" verbose="1" name="First Suite">
     <test name="First Test">
-
-        <parameter name="sUsername1" value="userrtestt4@gmail.com"/>
-
-        <parameter name="sPassword2" value="p9660220_"/>
-
         <classes>
             <class name="Test.GmailTest"> </class>
         </classes>

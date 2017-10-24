@@ -1,4 +1,5 @@
 package Pages;
+import Driver.WebDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -16,12 +17,22 @@ public class LetterPage extends AbstractPage{
     @FindBy(xpath = "//div[@class='T-I J-J5-Ji aoO T-I-atl L3']")
     private WebElement sendLetterButton;
 
-public void sendEmail(String nameLetter) {
+public void sendEmail(String nameLetter, String subject) {
     waitForElementClickable(inputMailField);
-    inputMailField.sendKeys("userrtestt1@gmail.com");
-    inputSubject.sendKeys(nameLetter);
-    inputTextField.sendKeys("test_letter");
-    sendLetterButton.click();
+
+    WebDecorator highlightedInputEmail = new WebDecorator(inputMailField);
+    highlightedInputEmail.highlightElement(driver);
+    highlightedInputEmail.sendKeys("userrtestt1@gmail.com");
+    WebDecorator highlightedInputSubject = new WebDecorator(inputSubject);
+    highlightedInputSubject.highlightElement(driver);
+    highlightedInputSubject.sendKeys(nameLetter);
+    WebDecorator highlightedInputTextFiled = new WebDecorator(inputTextField);
+    highlightedInputTextFiled.highlightElement(driver);
+    highlightedInputTextFiled.sendKeys(subject);
+    WebDecorator highightedbutton = new WebDecorator(sendLetterButton);
+    highightedbutton.highlightElement(driver);
+    highightedbutton.click();
+
 
 }
 

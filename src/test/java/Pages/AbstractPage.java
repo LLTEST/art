@@ -22,7 +22,7 @@ public class AbstractPage {
             Alert alert = driver.switchTo().alert();
             alert.accept();
             return true;
-        } catch (org.openqa.selenium.NoSuchElementException e) {
+        } catch (org.openqa.selenium.NoAlertPresentException e) {
             return false;
         }
     }

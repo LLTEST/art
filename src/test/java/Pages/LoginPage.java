@@ -1,5 +1,6 @@
 package Pages;
 
+import Driver.WebDecorator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,7 +32,10 @@ public class LoginPage extends AbstractPage {
     public HomePage loginFlow(String email,String pass) {
 
         waitForElementPresent(inputEmail);
-        inputEmail.sendKeys(email);
+        WebDecorator highlightEmailInput = new WebDecorator(inputEmail);
+        highlightEmailInput.highlightElement(driver);
+        highlightEmailInput.sendKeys(email);
+    //    inputEmail.sendKeys(email);
         identNextButton.click();
         waitForElementClickable(inputPassword);
         Actions action = new Actions(driver);
