@@ -20,15 +20,11 @@ public class LetterPage extends AbstractPage{
 public void sendEmail(String nameLetter, String subject) {
 
     waitForElementClickable(inputMailField);
-    WebDecorator highlighted = new WebDecorator();
-    highlighted.highlightElement(driver, inputMailField);
-    inputMailField.sendKeys("userrtestt1@gmail.com");
-    highlighted.highlightElement(driver,inputSubject);
-    inputSubject.sendKeys(nameLetter);
-    highlighted.highlightElement(driver,inputTextField);
-    inputTextField.sendKeys(subject);
-    highlighted.highlightElement(driver,sendLetterButton);
-    sendLetterButton.click();
+    WebDecorator highlighted = new WebDecorator(driver, inputMailField);
+    highlighted.sendKeys("userrtestt1@gmail.com");
+    new WebDecorator(driver,inputSubject).sendKeys(nameLetter);
+    new WebDecorator(driver,inputTextField).sendKeys(subject);
+    new WebDecorator(driver, sendLetterButton).click();
 
 }
 

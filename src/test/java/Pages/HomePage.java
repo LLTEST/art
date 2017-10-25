@@ -16,7 +16,7 @@ public class HomePage extends AbstractPage  {
     @FindBy(xpath = "//div[text()='COMPOSE']")
     private WebElement composeButton;
 
-    @FindBy(xpath = "//span[@class='gb_ab gbii']")
+    @FindBy(xpath = "//span[@class='gb_bb gbii']")
     private WebElement myAccountButton;
 
     @FindBy(css = "#gb_71")

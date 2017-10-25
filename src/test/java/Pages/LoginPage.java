@@ -27,16 +27,14 @@ public class LoginPage extends AbstractPage {
     public HomePage loginFlow(String email,String pass) {
 
         waitForElementPresent(inputEmail);
-        WebDecorator highlightEmailInput = new WebDecorator();
-        highlightEmailInput.highlightElement(driver, inputEmail);
-        inputEmail.sendKeys(email);
-        identNextButton.click();
+        WebDecorator highlightEmailInput = new WebDecorator(driver, inputEmail);
+        highlightEmailInput.sendKeys(email);
+        new WebDecorator(driver, identNextButton).click();
         waitForElementClickable(inputPassword);
         Actions action = new Actions(driver);
         action.moveToElement(inputPassword).click();
-        highlightEmailInput.highlightElement(driver,inputPassword);
-        inputPassword.sendKeys(pass);
-        passNextButton.click();
+        new WebDecorator(driver, inputPassword).sendKeys(pass);
+        new WebDecorator(driver, passNextButton).click();
         return new HomePage(driver);
     }
 

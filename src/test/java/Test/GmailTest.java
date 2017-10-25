@@ -31,7 +31,7 @@ public class GmailTest {
     @Test(description = "gmail Spam Test", dataProvider = "data")
     public void gmailSpamTest(User user1, User user2,Letter message) {
         loginpage = new LoginPage(driver);
-        homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(), user2.getPASS1());
+        homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER1(), user2.getPASS1());
         letter = homepage.openLetter();
         letter.sendEmail(message.getNAME1(),message.getNAME1());
         homepage.quitFromGmail();
