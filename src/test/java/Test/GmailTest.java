@@ -7,6 +7,8 @@ import Pages.LetterPage;
 import Pages.LoginPage;
 import businessObjects.Letter;
 import businessObjects.User;
+import org.apache.log4j.Level;
+import org.apache.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -16,6 +18,7 @@ import org.testng.annotations.Test;
 
 public class GmailTest {
 
+    private static final Logger Log = Logger.getLogger(GmailTest.class);
     private WebDriver driver;
     private LoginPage loginpage;
     private HomePage homepage;
@@ -23,14 +26,18 @@ public class GmailTest {
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
+        Log.setLevel(Level.INFO);
+        driver = DriverSingleton.getWebDriverInstance("chrome");
 
-        driver = DriverSingleton.getWebDriverInstance("chromete");
 
     }
 
     @Test(description = "gmail Spam Test", dataProvider = "data")
     public void gmailSpamTest(User user1, User user2,Letter message) {
+      //  BasicConfigurator.configure();
+        Log.info("Instance is initialized");
         loginpage = new LoginPage(driver);
+        Log.info("Instance is initialized");
         homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER1(), user2.getPASS1());
         letter = homepage.openLetter();
         letter.sendEmail(message.getNAME1(),message.getNAME1());
