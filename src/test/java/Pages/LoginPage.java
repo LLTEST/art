@@ -20,31 +20,25 @@ public class LoginPage extends AbstractPage {
     @FindBy(xpath ="//*[@id='passwordNext']")
     private WebElement passNextButton;
 
-
-
-
-
     public LoginPage(WebDriver driver) {
         super(driver) ;
     }
 
-
     public HomePage loginFlow(String email,String pass) {
 
         waitForElementPresent(inputEmail);
-        WebDecorator highlightEmailInput = new WebDecorator(inputEmail);
-        highlightEmailInput.highlightElement(driver);
-        highlightEmailInput.sendKeys(email);
-    //    inputEmail.sendKeys(email);
+        WebDecorator highlightEmailInput = new WebDecorator();
+        highlightEmailInput.highlightElement(driver, inputEmail);
+        inputEmail.sendKeys(email);
         identNextButton.click();
         waitForElementClickable(inputPassword);
         Actions action = new Actions(driver);
         action.moveToElement(inputPassword).click();
+        highlightEmailInput.highlightElement(driver,inputPassword);
         inputPassword.sendKeys(pass);
         passNextButton.click();
         return new HomePage(driver);
     }
-
 
     public LoginPage open(String URL_PAGE) {
 
@@ -52,6 +46,5 @@ public class LoginPage extends AbstractPage {
         driver.manage().window().maximize();
         return this;
     }
-
 
 }

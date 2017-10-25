@@ -6,37 +6,22 @@ import java.util.List;
 
 public class WebDecorator implements WebElement {
 
-    private WebElement element;
-
-    public WebDecorator(WebElement element){
-        this.element=element;
-    }
-
-    public void highlightElement(WebDriver driver){
+    public void highlightElement(WebDriver driver, WebElement element){
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("arguments[0].setAttribute('style', 'background: yellow; border: 2px solid red;');", element);
     }
 
+    @Override
+    public void click() { }
 
     @Override
-    public void click() {
-
-    }
+    public void submit() { }
 
     @Override
-    public void submit() {
-
-    }
+    public void sendKeys(CharSequence... keysToSend) { }
 
     @Override
-    public void sendKeys(CharSequence... keysToSend) {
-
-    }
-
-    @Override
-    public void clear() {
-
-    }
+    public void clear() { }
 
     @Override
     public String getTagName() {

@@ -12,7 +12,6 @@ public class DriverSingleton {
     private static WebDriverCreator creator;
     private DriverSingleton(){}
 
-
     public static WebDriver getWebDriverInstance(String browsername){
         if (null == driver){
             switch (browsername) {
@@ -38,7 +37,5 @@ public class DriverSingleton {
         driver.quit();
         driver = null;
     }
-
-
 
 }

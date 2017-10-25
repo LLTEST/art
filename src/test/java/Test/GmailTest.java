@@ -28,7 +28,6 @@ public class GmailTest {
 
     }
 
-
     @Test(description = "gmail Spam Test", dataProvider = "data")
     public void gmailSpamTest(User user1, User user2,Letter message) {
         loginpage = new LoginPage(driver);
@@ -45,7 +44,6 @@ public class GmailTest {
         loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(), user1.getPASS1());
         Assert.assertTrue(homepage.openSpamFolder().verifySpamLetter());
     }
-
 
     @AfterTest(description = "close browser")
     public void kill() {
