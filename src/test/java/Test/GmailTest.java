@@ -7,8 +7,11 @@ import Pages.LetterPage;
 import Pages.LoginPage;
 import businessObjects.Letter;
 import businessObjects.User;
+import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
@@ -26,6 +29,8 @@ public class GmailTest {
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
+     //   DOMConfigurator.configure("log4j.xml");
+        PropertyConfigurator.configure("log4j.properties");
         Log.setLevel(Level.INFO);
         driver = DriverSingleton.getWebDriverInstance("chrome");
 
@@ -34,7 +39,7 @@ public class GmailTest {
 
     @Test(description = "gmail Spam Test", dataProvider = "data")
     public void gmailSpamTest(User user1, User user2,Letter message) {
-      //  BasicConfigurator.configure();
+     //   BasicConfigurator.configure();
         Log.info("Instance is initialized");
         loginpage = new LoginPage(driver);
         Log.info("Instance is initialized");

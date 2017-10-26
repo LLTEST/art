@@ -1,6 +1,7 @@
 package Pages;
 
 import Driver.WebDecorator;
+import org.apache.log4j.xml.DOMConfigurator;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
