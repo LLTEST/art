@@ -29,37 +29,49 @@ public class GmailTest {
 
     @BeforeTest(description = "start browser")
     private void initBrowser() {
-     //   DOMConfigurator.configure("log4j.xml");
+      //  DOMConfigurator.configure("log4j.xml");
         PropertyConfigurator.configure("log4j.properties");
-        Log.setLevel(Level.INFO);
         driver = DriverSingleton.getWebDriverInstance("chrome");
-
+        Log.info("Instance is initialized");
 
     }
 
     @Test(description = "gmail Spam Test", dataProvider = "data")
     public void gmailSpamTest(User user1, User user2,Letter message) {
-     //   BasicConfigurator.configure();
-        Log.info("Instance is initialized");
+
+
         loginpage = new LoginPage(driver);
-        Log.info("Instance is initialized");
+        Log.info("LoginPage is opened");
         homepage = loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER1(), user2.getPASS1());
+        Log.info("User1 is logged");
         letter = homepage.openLetter();
-        letter.sendEmail(message.getNAME1(),message.getNAME1());
-        homepage.quitFromGmail();
-        loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(), user1.getPASS1());
-        homepage.markSpamLetter().reportSpam().quitFromGmail();
-        loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER1(), user2.getPASS1());
-        homepage.openLetter();
+        Log.info("Letter draw is opened");
         letter.sendEmail(message.getNAME1(),message.getSUBJECT1());
+        Log.info("Email1 is sent to User2");
         homepage.quitFromGmail();
+        Log.info("User1 is logged out");
         loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(), user1.getPASS1());
+        Log.info("User2 is logged");
+        homepage.markSpamLetter().reportSpam().quitFromGmail();
+        Log.info("User2 marked email as spam and logged out");
+        loginpage.open(DataSet.URL_PAGE).loginFlow(user2.getUSER1(), user2.getPASS1());
+        Log.info("User1 is logged again");
+        homepage.openLetter();
+        Log.info("Letter draw is opened");
+        letter.sendEmail(message.getNAME1(),message.getSUBJECT1());
+        Log.info("Email1 is sent to User2");
+        homepage.quitFromGmail();
+        Log.info("User1 is logged out");
+        loginpage.open(DataSet.URL_PAGE).loginFlow(user1.getUSER1(), user1.getPASS1());
+        Log.info("User2 is logged");
         Assert.assertTrue(homepage.openSpamFolder().verifySpamLetter());
+        Log.info("Test is successfully finished");
     }
 
     @AfterTest(description = "close browser")
     public void kill() {
         DriverSingleton.closeDriver();
+        Log.info("Instance is closed");
     }
 
     @DataProvider(name = "data")
